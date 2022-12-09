@@ -29,7 +29,7 @@ export default function ProfilePage() {
           />
         }
       />
-      <div>프로필</div>
+      <div>프로필입니다.</div>
       <UserProfile />
       <div>
         상품목록
