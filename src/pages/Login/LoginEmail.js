@@ -4,6 +4,7 @@ import { getLoginApiResponse } from "../../lib/apis/loginApis";
 import AuthForm from "../../component/form/AuthForm";
 export default function LoginPage() {
   const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
