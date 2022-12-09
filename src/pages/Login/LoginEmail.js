@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getLoginApiResponse } from "../../lib/apis/loginApis";
 import AuthForm from "../../component/form/AuthForm";
-import { Link } from "react-router-dom";
 export default function LoginPage() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
@@ -34,7 +33,7 @@ export default function LoginPage() {
         onChange={onChange}
         onSubmit={onLogin}
       />
-      <Link to="/join">회원가입</Link>
+      <Link to="/join">회원가입 하러가기</Link>
     </div>
   );
 }
