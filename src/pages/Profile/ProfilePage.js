@@ -32,7 +32,7 @@ export default function ProfilePage() {
       <div>프로필</div>
       <UserProfile />
       <div>
-        상품목록
+        상품목록입니다.~
         <ProductList />
       </div>
       <NavBar />
