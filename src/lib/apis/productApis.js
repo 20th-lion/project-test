@@ -1,13 +1,12 @@
-import client from './client';
+import client from "./client";
 
 export const registProduct = async (productInfo) => {
   productInfo.price = parseInt(productInfo.price);
-  const reqPath = '/product';
+  const reqPath = "/product";
   const productData = {
     product: productInfo,
   };
   const res = client.post(reqPath, productData);
-  console.log(res);
   return res;
 };
 
@@ -16,6 +15,12 @@ export const getProductList = async () => {
 
   const res = await client.get(reqPath);
 
-  console.log(res);
+  return res;
+};
+
+export const removeProduct = async (productId) => {
+  const reqPath = `/product/${productId}`;
+  const res = await client.delete(reqPath);
+
   return res;
 };

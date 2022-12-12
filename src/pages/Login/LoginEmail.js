@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { getLoginApiResponse } from "../../lib/apis/loginApis";
+
 import AuthForm from "../../component/form/AuthForm";
+
 export default function LoginPage() {
   const navigate = useNavigate();
 
@@ -18,13 +20,14 @@ export default function LoginPage() {
     });
   };
 
-  const onLogin = () =>
+  const onLogin = async () => {
     getLoginApiResponse(inputs).then((res) => {
       const { accountname, token } = res.data.user;
       localStorage.setItem("token", token);
       localStorage.setItem("accountname", accountname);
       navigate("/");
     });
+  };
 
   return (
     <div>

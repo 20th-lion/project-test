@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem("token");
 
 const client = axios.create({
-  baseURL: 'https://mandarin.api.weniv.co.kr',
+  baseURL: process.env.REACT_APP_URL,
   headers: {
     Authorization: `Bearer ${token}`,
-    'Content-type': 'application/json',
+    "Content-type": "application/json",
   },
 });
 

@@ -1,17 +1,18 @@
-import React, { useState, useRef } from 'react';
-import Header from '../../component/common/Header';
-import Button from '../../component/common/Button';
-import { useNavigate } from 'react-router-dom';
-import { registProduct } from '../../lib/apis/productApis';
+import React, { useState, useRef } from "react";
+import Header from "../../component/common/Header";
+import Button from "../../component/common/Button";
+import { useNavigate } from "react-router-dom";
+import { registProduct } from "../../lib/apis/productApis";
+import { imageUpload } from "../../lib/apis/imageUploadApi";
 
 export default function ProductUploadPage() {
   const navigate = useNavigate();
   const photoInput = useRef();
   const [productInfo, setProductInfo] = useState({
-    itemName: '',
+    itemName: "",
     price: 0,
-    link: '',
-    itemImage: '',
+    link: "",
+    itemImage: "",
   });
 
   const onChange = (e) => {
@@ -22,41 +23,45 @@ export default function ProductUploadPage() {
     });
   };
 
+  const onRegistImg = () => {
+    const file = photoInput.current.files[0];
+    imageUpload(file).then((res) => {
+      const itemImage = "https://mandarin.api.weniv.co.kr/" + res.data.filename;
+      setProductInfo({ ...productInfo, itemImage });
+    });
+  };
+
   let isCompleted = false;
   if (
-    productInfo.itemName !== '' &&
+    productInfo.itemName !== "" &&
     productInfo.price > 0 &&
-    productInfo.link !== '' &&
-    productInfo.itemImage !== ''
+    productInfo.link !== "" &&
+    productInfo.itemImage !== ""
   ) {
     isCompleted = true;
   }
 
-  const onProductRegist = () => {
+  const productRegist = () => {
     registProduct(productInfo);
-    // getProductListApi();
-    // navigate('/profile');
+    navigate("/profile");
   };
+
   return (
     <>
       <Header
         leftChild={
-          <Button onClick={() => navigate(-1)} text={'뒤로가기'} active />
+          <Button onClick={() => navigate(-1)} text={"뒤로가기"} active />
         }
         rightChild={
-          <Button
-            onClick={onProductRegist}
-            text={'저장'}
-            active={isCompleted}
-          />
+          <Button onClick={productRegist} text={"저장"} active={isCompleted} />
         }
       />
       <div>
         <div
           style={{
-            width: '200px',
-            height: '200px',
-            backgroundColor: 'gray',
+            width: "200px",
+            height: "200px",
+            backgroundColor: "gray",
           }}
           onClick={() => {
             photoInput.current.click();
@@ -65,9 +70,8 @@ export default function ProductUploadPage() {
           <input
             ref={photoInput}
             type="file"
-            accept="image/jpg, image/jpeg, image/png"
-            name="itemImage"
-            onChange={(e) => onChange(e)}
+            accept="image/*"
+            onChange={onRegistImg}
           />
         </div>
         <div>
